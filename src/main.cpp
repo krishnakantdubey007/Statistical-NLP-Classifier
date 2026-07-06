@@ -1,21 +1,32 @@
 #include <iostream>
-#include "Tokenizer.hpp"
+#include "DataLoader.hpp"
 
 int main()
 {
-    Tokenizer tokenizer;
-
-    std::string message =
-        "Congratulations!!! You won FREE Lottery.";
-
-    std::vector<std::string> tokens =
-        tokenizer.tokenize(message);
-
-    std::cout << "Tokens:\n";
-
-    for (const auto& word : tokens)
+    try
     {
-        std::cout << word << std::endl;
+        DataLoader loader;
+
+        std::vector<Message> dataset =
+            loader.loadDataset("data/SMSSpamCollection");
+
+        std::cout << "Dataset Loaded Successfully!\n";
+        std::cout << "Total Messages : "
+                  << dataset.size() << "\n\n";
+
+        std::cout << "First Message\n";
+        std::cout << "-------------------------\n";
+        std::cout << "Label : "
+                  << dataset[0].label << "\n";
+
+        std::cout << "Text : "
+                  << dataset[0].text << "\n";
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "Error : "
+                  << e.what()
+                  << std::endl;
     }
 
     return 0;
