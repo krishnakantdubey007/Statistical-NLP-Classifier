@@ -32,6 +32,11 @@ public:
     void train(const std::vector<Message>& dataset);
 
     std::string predict(const std::string& text);
+
+    // Statistics
+    int getSpamMessageCount() const;
+    int getHamMessageCount() const;
+    int getVocabularySize() const;
 };
 
 #endif

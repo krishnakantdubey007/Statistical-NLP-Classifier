@@ -22,7 +22,7 @@ NaiveBayes::NaiveBayes()
 
 void NaiveBayes::train(const std::vector<Message>& dataset)
 {
-    // Reset the model if train() is called multiple times
+    // Reset model if train() is called again
     spamWordCounts.clear();
     hamWordCounts.clear();
 
@@ -34,10 +34,8 @@ void NaiveBayes::train(const std::vector<Message>& dataset)
 
     vocabularySize = 0;
 
-    // Process every message
     for (const Message& msg : dataset)
     {
-        // Count messages
         if (msg.label == "spam")
         {
             ++spamMessageCount;
@@ -48,14 +46,11 @@ void NaiveBayes::train(const std::vector<Message>& dataset)
         }
         else
         {
-            // Ignore invalid labels
             continue;
         }
 
-        // Tokenize message
         std::vector<std::string> tokens = tokenizer.tokenize(msg.text);
 
-        // Count words
         for (const std::string& word : tokens)
         {
             if (msg.label == "spam")
@@ -71,7 +66,6 @@ void NaiveBayes::train(const std::vector<Message>& dataset)
         }
     }
 
-    // Compute vocabulary size
     std::unordered_set<std::string> vocabulary;
 
     for (const auto& entry : spamWordCounts)
@@ -137,4 +131,23 @@ std::string NaiveBayes::predict(const std::string& text)
     }
 
     return (logScoreSpam > logScoreHam) ? "spam" : "ham";
+}
+
+// ============================================================================
+// Statistics Getters
+// ============================================================================
+
+int NaiveBayes::getSpamMessageCount() const
+{
+    return spamMessageCount;
+}
+
+int NaiveBayes::getHamMessageCount() const
+{
+    return hamMessageCount;
+}
+
+int NaiveBayes::getVocabularySize() const
+{
+    return vocabularySize;
 }
