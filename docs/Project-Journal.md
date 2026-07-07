@@ -58,3 +58,40 @@ Day 1
 - STL (unordered_map, unordered_set, vector)
 - Exception Handling
 - Interactive Console Programming
+
+V# Version 1.0 Completed
+**Date:** 07 July 2026
+
+## Completed Features
+
+- Implemented Tokenizer module
+- Implemented DataLoader module
+- Implemented Multinomial Naive Bayes classifier
+- Added Laplace Smoothing
+- Added Interactive Console Menu
+- Added Model Statistics
+- Added About Project section
+- Integrated UCI SMS Spam Collection dataset
+- Added README documentation
+- Added GitHub screenshots
+- Organized project into modular C++17 architecture
+
+## Technologies Used
+
+- C++17
+- STL
+- Object-Oriented Programming
+- Git
+- GitHub
+
+## Current Status
+
+Stable Version 1.0 Released
+
+## Next Goals (Version 1.1)
+
+- Display prediction confidence
+- Show spam and ham probabilities
+- Add confusion matrix
+- Calculate accuracy, precision, recall and F1-score
+- Improve console interface
