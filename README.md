@@ -234,27 +234,26 @@ Training model...
 
 ## Startup Menu
 
-![Startup](docs/images/menu.png)
+!## Startup Menu
 
+<img src="docs/screenshots/menu.png" width="800">
 ---
 
 ## Spam Prediction
 
-![Prediction](docs/images/prediction.png)
+![Prediction](docs/screenshots/prediction.png)
 
 ---
 
 ## Model Statistics
 
-![Statistics](docs/images/statistics.png)
+![Statistics](docs/screenshots/statistics.png)
 
 ---
 
 ## About Project
 
-![About](docs/images/about.png)
----
-
+![About](docs/screenshots/about.png)
 # 📈 Current Features
 
 - Text preprocessing
