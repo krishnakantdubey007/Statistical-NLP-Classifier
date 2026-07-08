@@ -88,13 +88,25 @@ void predictMessage(NaiveBayes& classifier)
     std::cout << "Prediction\n";
     std::cout << "---------------------------------------------------------\n";
 
-    if (result == "spam")
+    if      (result == "spam")
     {
         std::cout << "SPAM\n";
     }
-    else
+    else if (result == "ham")
     {
         std::cout << "HAM\n";
+    }
+    else if (result == "unknown")
+    {
+        std::cout << "[!] Input contained no recognisable words. Please try again.\n";
+    }
+    else if (result == "untrained")
+    {
+        std::cout << "[!] Model is not trained. Load a dataset first.\n";
+    }
+    else
+    {
+        std::cout << "[!] Unexpected result: " << result << "\n";
     }
 
     std::cout << "=========================================================\n";

@@ -2,7 +2,6 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
-#include <iostream>
 
 /**
  * Loads a dataset from a TSV file.

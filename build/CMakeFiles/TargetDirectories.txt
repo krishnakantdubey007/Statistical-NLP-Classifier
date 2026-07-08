@@ -1,0 +1,4 @@
+D:/Projects/Statistical-NLP-Classifier/build/CMakeFiles/nlp_classifier.dir
+D:/Projects/Statistical-NLP-Classifier/build/CMakeFiles/nlp_classifier_gui.dir
+D:/Projects/Statistical-NLP-Classifier/build/CMakeFiles/edit_cache.dir
+D:/Projects/Statistical-NLP-Classifier/build/CMakeFiles/rebuild_cache.dir

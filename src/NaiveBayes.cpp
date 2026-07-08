@@ -36,24 +36,22 @@ void NaiveBayes::train(const std::vector<Message>& dataset)
 
     for (const Message& msg : dataset)
     {
-        if (msg.label == "spam")
-        {
-            ++spamMessageCount;
-        }
-        else if (msg.label == "ham")
-        {
-            ++hamMessageCount;
-        }
-        else
-        {
-            continue;
-        }
+        // R-BUG-03 FIX: compute both booleans first so msg.label is compared
+        // at most once per class (isSpam) and once for the ham check (isHam).
+        // The previous version compared msg.label once for the counter, then
+        // again to set isSpam — two comparisons per message plus one per token.
+        const bool isSpam = (msg.label == "spam");
+        const bool isHam  = !isSpam && (msg.label == "ham");
+        if (!isSpam && !isHam) continue;
+
+        if (isSpam) ++spamMessageCount;
+        else        ++hamMessageCount;
 
         std::vector<std::string> tokens = tokenizer.tokenize(msg.text);
 
         for (const std::string& word : tokens)
         {
-            if (msg.label == "spam")
+            if (isSpam)
             {
                 spamWordCounts[word]++;
                 ++totalSpamWords;
@@ -87,7 +85,19 @@ void NaiveBayes::train(const std::vector<Message>& dataset)
 
 std::string NaiveBayes::predict(const std::string& text)
 {
+    // BUG-02: guard against calling predict() before train() has been called.
+    // Division by zero would occur computing class priors if counts are 0.
+    if (spamMessageCount == 0 || hamMessageCount == 0)
+        return "untrained";
+
     std::vector<std::string> tokens = tokenizer.tokenize(text);
+
+    // LOGIC-02: guard against empty token list (whitespace-only input).
+    // Without tokens the loop never runs and the model always returns
+    // whichever class has the higher prior (ham for UCI dataset), giving
+    // a silently incorrect result.
+    if (tokens.empty())
+        return "unknown";
 
     int totalMessages = spamMessageCount + hamMessageCount;
 
@@ -108,6 +118,8 @@ std::string NaiveBayes::predict(const std::string& text)
             spamCount = spamIt->second;
         }
 
+        // operator[] zero-initialises missing keys so the +1 Laplace term
+        // is applied even for words unseen during training.
         double spamProbability =
             static_cast<double>(spamCount + 1) /
             (totalSpamWords + vocabularySize);

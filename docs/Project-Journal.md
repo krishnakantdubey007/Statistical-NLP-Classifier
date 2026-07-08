@@ -88,10 +88,44 @@ V# Version 1.0 Completed
 
 Stable Version 1.0 Released
 
-## Next Goals (Version 1.1)
+## Next Goals (Version 2.1)
 
-- Display prediction confidence
-- Show spam and ham probabilities
-- Add confusion matrix
-- Calculate accuracy, precision, recall and F1-score
-- Improve console interface
+- Calculate accuracy, precision, recall, and F1-score
+- Visual confusion matrix in GUI
+- Model serialization (saving and loading trained weights)
+
+# Version 2.0 Completed
+**Date:** 08 July 2026
+
+## Completed Features
+
+### UI Refactoring (Raylib & RayGUI Desktop Application)
+- Replaced the console interface with a professional 5-page desktop GUI application (`gui_main.cpp`).
+- Designed a sleek modern dark cyber theme with card hierarchy and custom accent borders.
+- Developed a dynamic status-based visual indicator badge system for SPAM and HAM classifications.
+- Integrated a live statistics overview screen featuring ratio indicators and responsive tile cards.
+- Integrated standard back navigation and exit overlay screens.
+- Avoided state conflicts by packing Predict page state values into a testable cohesive structure.
+- Addressed cross-page textbox focus states to ensure input boxes clear properly.
+
+### Code Quality & Robustness Upgrades
+- Added deep exceptions wrapping around the startup loading/training cycle.
+- Fixed a silent class-prior fallback issue for empty whitespace inputs.
+- Safeguarded class likelihood calculations against division-by-zero on untrained models.
+- Eliminated triple redundant string checks on dataset labels per loop iteration.
+- Optimized circle alignment rendering logic using exact float vector coordinates.
+- Prevented button collision overlaps on nested page menus using RayGUI lock triggers.
+
+### Custom Typography System
+- Set up a dynamic assets resolution path for font lookup handlers.
+- Loaded a high-resolution, pixel-perfect copy of the Consolas modern monospace typeface (`consola.ttf`).
+- Integrated global font assignments mapping to both standard text and library elements.
+
+## Technologies Used
+- C++17
+- Raylib 5.x
+- RayGUI 4.x
+- CMake Build System
+
+## Current Status
+Stable Version 2.0 Ready for Release
